@@ -68,9 +68,6 @@ public class Config {
     private final String url_base_json;
     private final String official_version_tag;
     private final String android_version;
-    private final String weekly_version_tag;
-    private final String security_version_tag;
-
     /*
      * Using reflection voodoo instead calling the hidden class directly, to
      * dev/test outside of AOSP tree
@@ -122,12 +119,10 @@ public class Config {
         secure_mode_default = res.getBoolean(R.bool.secure_mode_default);
         url_base_json = res.getString(R.string.url_base_json);
         official_version_tag = res.getString(R.string.official_version_tag);
-        weekly_version_tag = res.getString(R.string.weekly_version_tag);
-        security_version_tag = res.getString(R.string.security_version_tag);
         android_version = getProperty(context,
                 res.getString(R.string.android_version), "");
         filename_base_prefix = String.format(Locale.ENGLISH,
-                res.getString(R.string.filename_base), android_version);
+                res.getString(R.string.filename_base), "");
         boolean keep_screen_on = false;
         try {
             String[] devices = res
@@ -286,8 +281,6 @@ public class Config {
     }
 
     public boolean isOfficialVersion() {
-        return getVersion().indexOf(official_version_tag) != -1 ||
-                getVersion().indexOf(weekly_version_tag) != -1 ||
-                getVersion().indexOf(security_version_tag) != -1;
+        return getVersion().indexOf(official_version_tag) != -1;
     }
 }
