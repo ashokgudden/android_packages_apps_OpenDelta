@@ -890,6 +890,7 @@ OnWantUpdateCheckListener, OnSharedPreferenceChangeListener {
         } catch (Exception e) {
         }
         updateState(STATE_ERROR_UNOFFICIAL, null, null, null, config.getVersion(), null);
+        Logger.d("This is second check if first fails, for testing purpose only");
         return null;
     }
 
@@ -1107,9 +1108,9 @@ OnWantUpdateCheckListener, OnSharedPreferenceChangeListener {
 
         if (!isSupportedVersion()) {
             // TODO - to be more generic this should maybe use the info from getNewestFullBuild
-            updateState(STATE_ERROR_UNOFFICIAL, null, null, null, config.getVersion(), null);
-            Logger.i("Ignoring request to check for updates - not compatible for update! " + config.getVersion());
-            return false;
+            // updateState(STATE_ERROR_UNOFFICIAL, null, null, null, config.getVersion(), null);
+            Logger.i("Testing this new way - Let's see! " + config.getVersion());
+            return true;
         }
         if (!networkState.isConnected()) {
             updateState(STATE_ERROR_CONNECTION, null, null, null, null, null);
