@@ -25,6 +25,11 @@
 			android:key="secure_mode"
 			android:persistent="false"
 			android:title="@string/secure_mode_title" />
+		<CheckBoxPreference
+			android:defaultValue="true"
+			android:key="backup_mode"
+			android:persistent="false"
+			android:title="@string/backup_mode_title" />
 	</PreferenceCategory>
 	<PreferenceCategory
 		android:key="category_scheduler"

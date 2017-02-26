@@ -44,6 +44,11 @@ public class Config {
         return instance;
     }
 
+    private final static String PREF_BACKUP_MODE_NAME = "backup_mode";
+    private final static String PREF_SHOWN_RECOVERY_WARNING_BACKUP_NAME = "shown_recovery_warning_backup";
+    private final static String PREF_SHOWN_RECOVERY_WARNING_NOT_BACKUP_NAME = "shown_recovery_warning_not_backup";
+
+
     private final static String PREF_SECURE_MODE_NAME = "secure_mode";
     private final static String PREF_SHOWN_RECOVERY_WARNING_SECURE_NAME = "shown_recovery_warning_secure";
     private final static String PREF_SHOWN_RECOVERY_WARNING_NOT_SECURE_NAME = "shown_recovery_warning_not_secure";
@@ -63,6 +68,8 @@ public class Config {
     private final String inject_signature_keys;
     private final boolean secure_mode_enable;
     private final boolean secure_mode_default;
+    private final boolean backup_mode_enable;
+    private final boolean backup_mode_default;
     private final boolean keep_screen_on;
     private final String filename_base_prefix;
     private final String url_base_json;
@@ -117,6 +124,10 @@ public class Config {
         inject_signature_keys = res.getString(R.string.inject_signature_keys);
         secure_mode_enable = res.getBoolean(R.bool.secure_mode_enable);
         secure_mode_default = res.getBoolean(R.bool.secure_mode_default);
+
+        backup_mode_enable = res.getBoolean(R.bool.backup_mode_enable);
+        backup_mode_default = res.getBoolean(R.bool.backup_mode_default);
+
         url_base_json = res.getString(R.string.url_base_json);
         official_version_tag = res.getString(R.string.official_version_tag);
         android_version = getProperty(context,
@@ -154,6 +165,8 @@ public class Config {
         Logger.d("inject_signature_keys: %s", inject_signature_keys);
         Logger.d("secure_mode_enable: %d", secure_mode_enable ? 1 : 0);
         Logger.d("secure_mode_default: %d", secure_mode_default ? 1 : 0);
+        Logger.d("backup_mode_enable: %d", secure_mode_enable ? 1 : 0);
+        Logger.d("backup_mode_default: %d", secure_mode_default ? 1 : 0);
         Logger.d("keep_screen_on: %d", keep_screen_on ? 1 : 0);
     }
 
@@ -194,6 +207,27 @@ public class Config {
         } else {
             return inject_signature_enable;
         }
+    }
+
+    public boolean getBackupModeEnable() {
+        return backup_mode_enable;
+    }
+
+    public boolean getBackupModeDefault() {
+        return backup_mode_default && getBackupModeEnable();
+    }
+
+    public boolean getBackupModeCurrent() {
+        return getBackupModeEnable()
+                && prefs.getBoolean(PREF_BACKUP_MODE_NAME,
+                        getBackupModeDefault());
+    }
+
+    public boolean setBackupModeCurrent(boolean enable) {
+        prefs.edit()
+                .putBoolean(PREF_BACKUP_MODE_NAME,
+                        getBackupModeEnable() && enable).commit();
+        return getBackupModeCurrent();
     }
 
     public String getInjectSignatureKeys() {
@@ -238,6 +272,26 @@ public class Config {
         }
 
         return extras;
+    }
+
+    public boolean getShownRecoveryWarningBackup() {
+        return prefs.getBoolean(PREF_SHOWN_RECOVERY_WARNING_BACKUP_NAME, false);
+    }
+
+    public void setShownRecoveryWarningBackup() {
+        prefs.edit().putBoolean(PREF_SHOWN_RECOVERY_WARNING_BACKUP_NAME, true)
+                .commit();
+    }
+
+    public boolean getShownRecoveryWarningNotBackup() {
+        return prefs.getBoolean(PREF_SHOWN_RECOVERY_WARNING_NOT_BACKUP_NAME,
+                false);
+    }
+
+    public void setShownRecoveryWarningNotBackup() {
+        prefs.edit()
+                .putBoolean(PREF_SHOWN_RECOVERY_WARNING_NOT_BACKUP_NAME, true)
+                .commit();
     }
 
     public boolean getShownRecoveryWarningSecure() {

@@ -43,6 +43,12 @@
 	<!-- (TWRP) Requires 'secure_mode_enable'. Decides whether the default setting for secure mode is enabled (true) or disabled (false) -->
 	<item name="secure_mode_default" type="bool">false</item>
 
+	<!-- (TWRP) Add backup mode setting. Will take backup before flashing a new delta update ZIPs -->
+	<item name="backup_mode_enable" type="bool">true</item>
+
+	<!-- (TWRP) Requires 'backup_mode_enable'. Decides whether the default setting for backup mode is enabled (true) or disabled (false) -->
+	<item name="backup_mode_default" type="bool">false</item>
+
 	<!--
     	Devices (detected using property_device) which may crash while downloading/patching/verifying when the screen is off.
     	This appears to be an issue with the fuse daemon, but the cause has not yet been found or fixed. Until the issue is

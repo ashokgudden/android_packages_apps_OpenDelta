@@ -45,6 +45,15 @@
 
 	<!-- updates from 2013/12/18 -->
 
+	<string name="action_backup_mode">Backup</string>
+	<string name="backup_mode_title">Backup Mode</string>
+	<string name="backup_mode_enabled_title">Backup mode: enabled</string>
+	<string name="backup_mode_enabled_description"><![CDATA[System/Data/Recovery and boot partitions will be backed up before flashing the delta updates. This mode is only compatible with <b>TWRP</b>.]]></string>
+	<string name="backup_mode_disabled_title">Backup mode: disabled</string>
+	<string name="backup_mode_disabled_description"><![CDATA[No backup is going to be taken while flashing delta updates.]]></string>
+	<string name="recovery_notice_description_backup"><![CDATA[System/Data/Recovery and boot partitions will be backed up before flashing the delta updates. This mode is only compatible with <b>TWRP</b>.]]></string>
+	<string name="recovery_notice_description_not_backup"><![CDATA[Backup mode is off. Proceed with caution.]]></string>
+
 	<string name="action_secure_mode">Secure</string>
 	<string name="secure_mode_enabled_title">Secure mode: enabled</string>
 	<string name="secure_mode_enabled_description"><![CDATA[The update\'s cryptographic signature will be verified before flashing to confirm its origin, and no additional updates will be flashed. This mode is only compatible with <b>TWRP</b>.]]></string>

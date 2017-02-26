@@ -1559,6 +1559,15 @@ OnWantUpdateCheckListener, OnSharedPreferenceChangeListener {
                 FileOutputStream os = new FileOutputStream(
                         "/cache/recovery/openrecoveryscript", false);
                 try {
+                    if (!config.getBackupModeCurrent()) {
+                        // take backup first for predefined partitions
+                        // (Will backup system, data, Recovery and boot and use compression and skip MD5 generation)
+                        Logger.d("BackupmodeDisabled");
+                    } else {
+                        writeString(os, "backup SDCRBOM");
+                        Logger.d("BackupmodeEnabled");
+                    }
+
                     if (config.getInjectSignatureEnable() && deltaSignature) {
                         writeString(os, "cmd cat /res/keys > /res/keys_org");
                         writeString(os,

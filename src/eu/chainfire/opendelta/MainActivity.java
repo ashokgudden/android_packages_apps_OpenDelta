@@ -450,8 +450,8 @@ public class MainActivity extends Activity {
 
             final Runnable next = flashWarningFlashAfterUpdateZIPs;
 
-            CharSequence message = null;
-            if (!config.getSecureModeCurrent()
+             CharSequence message = null;
+             if (!config.getSecureModeCurrent()
                     && !config.getShownRecoveryWarningNotSecure()) {
                 message = Html
                         .fromHtml(getString(R.string.recovery_notice_description_not_secure));

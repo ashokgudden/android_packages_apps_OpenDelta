@@ -53,6 +53,7 @@ public class SettingsActivity extends PreferenceActivity implements
     public static final String PREF_AUTO_DOWNLOAD = "auto_download_actions";
     public static final String PREF_CHARGE_ONLY = "charge_only";
     public static final String PREF_BATTERY_LEVEL = "battery_level_string";
+    private static final String KEY_BACKUP_MODE = "backup_mode";
     private static final String KEY_SECURE_MODE = "secure_mode";
     private static final String KEY_CATEGORY_DOWNLOAD = "category_download";
     public static final String PREF_SCREEN_STATE_OFF = "screen_state_off";
@@ -72,6 +73,7 @@ public class SettingsActivity extends PreferenceActivity implements
     private ListPreference mBatteryLevel;
     private CheckBoxPreference mChargeOnly;
     private CheckBoxPreference mSecureMode;
+    private CheckBoxPreference mBackupMode;
     private Config mConfig;
     private PreferenceCategory mAutoDownloadCategory;
     private ListPreference mSchedulerMode;
@@ -117,6 +119,11 @@ public class SettingsActivity extends PreferenceActivity implements
         mSecureMode = (CheckBoxPreference) findPreference(KEY_SECURE_MODE);
         mSecureMode.setEnabled(mConfig.getSecureModeEnable());
         mSecureMode.setChecked(mConfig.getSecureModeCurrent());
+
+        mBackupMode = (CheckBoxPreference) findPreference(KEY_BACKUP_MODE);
+        mBackupMode.setEnabled(mConfig.getBackupModeEnable());
+        mBackupMode.setChecked(mConfig.getBackupModeCurrent());
+
         mAutoDownloadCategory = (PreferenceCategory) findPreference(KEY_CATEGORY_DOWNLOAD);
 
 
@@ -177,6 +184,19 @@ public class SettingsActivity extends PreferenceActivity implements
                     .setMessage(
                             Html.fromHtml(getString(value ? R.string.secure_mode_enabled_description
                                     : R.string.secure_mode_disabled_description)))
+                    .setCancelable(true)
+                    .setNeutralButton(android.R.string.ok, null).show();
+            return true;
+        } else if (preference == mBackupMode) {
+            boolean value = ((CheckBoxPreference) preference).isChecked();
+            mConfig.setBackupModeCurrent(value);
+            (new AlertDialog.Builder(this))
+                    .setTitle(
+                            value ? R.string.backup_mode_enabled_title
+                                    : R.string.backup_mode_disabled_title)
+                    .setMessage(
+                            Html.fromHtml(getString(value ? R.string.backup_mode_enabled_description
+                                    : R.string.backup_mode_disabled_description)))
                     .setCancelable(true)
                     .setNeutralButton(android.R.string.ok, null).show();
             return true;
