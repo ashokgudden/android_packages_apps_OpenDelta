@@ -1561,7 +1561,7 @@ OnWantUpdateCheckListener, OnSharedPreferenceChangeListener {
                 try {
                     if (!config.getBackupModeCurrent()) {
                         // take backup first for predefined partitions
-                        // (Will backup system, data, Recovery and boot and use compression and skip MD5 generation)
+                        // (Will backup system, data, cache, recovery and boot and use compression and skip MD5 generation)
                         Logger.d("BackupmodeDisabled");
                     } else {
                         writeString(os, "backup SDCRBOM");

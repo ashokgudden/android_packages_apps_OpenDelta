@@ -48,11 +48,13 @@
 	<string name="action_backup_mode">Backup</string>
 	<string name="backup_mode_title">Backup Mode</string>
 	<string name="backup_mode_enabled_title">Backup mode: enabled</string>
-	<string name="backup_mode_enabled_description"><![CDATA[System/Data/Recovery and boot partitions will be backed up before flashing the delta updates. This mode is only compatible with <b>TWRP</b>.]]></string>
+	<string name="backup_mode_enabled_description"><![CDATA[System/Data/Cache/Recovery and boot partitions will be backed up before flashing the delta updates. This mode is only compatible with <b>TWRP</b>.]]></string>
 	<string name="backup_mode_disabled_title">Backup mode: disabled</string>
-	<string name="backup_mode_disabled_description"><![CDATA[No backup is going to be taken while flashing delta updates.]]></string>
-	<string name="recovery_notice_description_backup"><![CDATA[System/Data/Recovery and boot partitions will be backed up before flashing the delta updates. This mode is only compatible with <b>TWRP</b>.]]></string>
+	<string name="backup_mode_disabled_description"><![CDATA[<b>Caution:</b> No backup is going to be taken before flashing the delta updates.]]></string>
+	<string name="recovery_notice_description_backup"><![CDATA[System/Data/Cache/Recovery and boot partitions will be backed up before flashing the delta updates. This mode is only compatible with <b>TWRP</b>.]]></string>
 	<string name="recovery_notice_description_not_backup"><![CDATA[Backup mode is off. Proceed with caution.]]></string>
+	<string name="flashWarningBackup_notice_title">Notice</string>
+	<string name="flashWarningBackup_notice_description"><![CDATA[<b>Backup Mode</b> is disabled. Proceed with <b>caution</b>.]]></string>
 
 	<string name="action_secure_mode">Secure</string>
 	<string name="secure_mode_enabled_title">Secure mode: enabled</string>
