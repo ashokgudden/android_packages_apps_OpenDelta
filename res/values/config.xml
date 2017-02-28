@@ -43,7 +43,13 @@
 	<!-- (TWRP) Requires 'secure_mode_enable'. Decides whether the default setting for secure mode is enabled (true) or disabled (false) -->
 	<item name="secure_mode_default" type="bool">false</item>
 
-	<!-- (TWRP) Add backup mode setting. Will take backup before flashing a new delta update ZIPs -->
+	<!-- (TWRP) Add clean mode setting. Will wipe data/cache/dalvik cache before flashing a new delta update ZIP -->
+	<item name="clean_mode_enable" type="bool">true</item>
+
+	<!-- (TWRP) Requires 'clean_mode_enable'. Decides whether the default setting for clean flash mode is enabled (true) or disabled (false) -->
+	<item name="clean_mode_default" type="bool">false</item>
+
+	<!-- (TWRP) Add backup mode setting. Will take backup before flashing a new delta update ZIP -->
 	<item name="backup_mode_enable" type="bool">true</item>
 
 	<!-- (TWRP) Requires 'backup_mode_enable'. Decides whether the default setting for backup mode is enabled (true) or disabled (false) -->

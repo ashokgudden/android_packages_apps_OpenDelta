@@ -53,6 +53,7 @@ public class SettingsActivity extends PreferenceActivity implements
     public static final String PREF_AUTO_DOWNLOAD = "auto_download_actions";
     public static final String PREF_CHARGE_ONLY = "charge_only";
     public static final String PREF_BATTERY_LEVEL = "battery_level_string";
+    private static final String KEY_CLEAN_MODE = "clean_mode";
     private static final String KEY_BACKUP_MODE = "backup_mode";
     private static final String KEY_SECURE_MODE = "secure_mode";
     private static final String KEY_CATEGORY_DOWNLOAD = "category_download";
@@ -73,6 +74,7 @@ public class SettingsActivity extends PreferenceActivity implements
     private ListPreference mBatteryLevel;
     private CheckBoxPreference mChargeOnly;
     private CheckBoxPreference mSecureMode;
+    private CheckBoxPreference mCleanMode;
     private CheckBoxPreference mBackupMode;
     private Config mConfig;
     private PreferenceCategory mAutoDownloadCategory;
@@ -119,6 +121,10 @@ public class SettingsActivity extends PreferenceActivity implements
         mSecureMode = (CheckBoxPreference) findPreference(KEY_SECURE_MODE);
         mSecureMode.setEnabled(mConfig.getSecureModeEnable());
         mSecureMode.setChecked(mConfig.getSecureModeCurrent());
+
+        mCleanMode = (CheckBoxPreference) findPreference(KEY_CLEAN_MODE);
+        mCleanMode.setEnabled(mConfig.getCleanModeEnable());
+        mCleanMode.setChecked(mConfig.getCleanModeCurrent());
 
         mBackupMode = (CheckBoxPreference) findPreference(KEY_BACKUP_MODE);
         mBackupMode.setEnabled(mConfig.getBackupModeEnable());
@@ -184,6 +190,19 @@ public class SettingsActivity extends PreferenceActivity implements
                     .setMessage(
                             Html.fromHtml(getString(value ? R.string.secure_mode_enabled_description
                                     : R.string.secure_mode_disabled_description)))
+                    .setCancelable(true)
+                    .setNeutralButton(android.R.string.ok, null).show();
+            return true;
+        } else if (preference == mCleanMode) {
+            boolean value = ((CheckBoxPreference) preference).isChecked();
+            mConfig.setCleanModeCurrent(value);
+            (new AlertDialog.Builder(this))
+                    .setTitle(
+                            value ? R.string.clean_mode_enabled_title
+                                    : R.string.clean_mode_disabled_title)
+                    .setMessage(
+                            Html.fromHtml(getString(value ? R.string.clean_mode_enabled_description
+                                    : R.string.clean_mode_disabled_description)))
                     .setCancelable(true)
                     .setNeutralButton(android.R.string.ok, null).show();
             return true;

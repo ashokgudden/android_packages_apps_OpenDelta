@@ -1562,10 +1562,20 @@ OnWantUpdateCheckListener, OnSharedPreferenceChangeListener {
                     if (!config.getBackupModeCurrent()) {
                         // take backup first for predefined partitions
                         // (Will backup system, data, cache, recovery and boot and use compression and skip MD5 generation)
-                        Logger.d("BackupmodeDisabled");
+                        Logger.d("Backup mode is disabled.");
                     } else {
                         writeString(os, "backup SDCRBOM");
-                        Logger.d("BackupmodeEnabled");
+                        Logger.d("Backup mode is enabled.");
+                    }
+
+                    if (config.getCleanModeCurrent()) {
+                        // if clean flash is selected, format all partitions except internal storage.
+                        writeString(os, "wipe data");
+                        writeString(os, "wipe cache");
+                        writeString(os, "wipe dalvik");
+                        Logger.d("Clean flash is selected so formatting all data except internal storage.");
+                    } else {
+                        Logger.d("Dirty flash it is then, :(");
                     }
 
                     if (config.getInjectSignatureEnable() && deltaSignature) {

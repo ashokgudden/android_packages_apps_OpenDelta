@@ -44,10 +44,8 @@ public class Config {
         return instance;
     }
 
+    private final static String PREF_CLEAN_MODE_NAME = "clean_mode";
     private final static String PREF_BACKUP_MODE_NAME = "backup_mode";
-    private final static String PREF_SHOWN_RECOVERY_WARNING_BACKUP_NAME = "shown_recovery_warning_backup";
-    private final static String PREF_SHOWN_RECOVERY_WARNING_NOT_BACKUP_NAME = "shown_recovery_warning_not_backup";
-
 
     private final static String PREF_SECURE_MODE_NAME = "secure_mode";
     private final static String PREF_SHOWN_RECOVERY_WARNING_SECURE_NAME = "shown_recovery_warning_secure";
@@ -68,6 +66,8 @@ public class Config {
     private final String inject_signature_keys;
     private final boolean secure_mode_enable;
     private final boolean secure_mode_default;
+    private final boolean clean_mode_enable;
+    private final boolean clean_mode_default;
     private final boolean backup_mode_enable;
     private final boolean backup_mode_default;
     private final boolean keep_screen_on;
@@ -125,6 +125,9 @@ public class Config {
         secure_mode_enable = res.getBoolean(R.bool.secure_mode_enable);
         secure_mode_default = res.getBoolean(R.bool.secure_mode_default);
 
+        clean_mode_enable = res.getBoolean(R.bool.clean_mode_enable);
+        clean_mode_default = res.getBoolean(R.bool.clean_mode_default);
+
         backup_mode_enable = res.getBoolean(R.bool.backup_mode_enable);
         backup_mode_default = res.getBoolean(R.bool.backup_mode_default);
 
@@ -165,8 +168,10 @@ public class Config {
         Logger.d("inject_signature_keys: %s", inject_signature_keys);
         Logger.d("secure_mode_enable: %d", secure_mode_enable ? 1 : 0);
         Logger.d("secure_mode_default: %d", secure_mode_default ? 1 : 0);
-        Logger.d("backup_mode_enable: %d", secure_mode_enable ? 1 : 0);
-        Logger.d("backup_mode_default: %d", secure_mode_default ? 1 : 0);
+        Logger.d("clean_mode_enable: %d", clean_mode_enable ? 1 : 0);
+        Logger.d("clean_mode_default: %d", clean_mode_default ? 1 : 0);
+        Logger.d("backup_mode_enable: %d", backup_mode_enable ? 1 : 0);
+        Logger.d("backup_mode_default: %d", backup_mode_default ? 1 : 0);
         Logger.d("keep_screen_on: %d", keep_screen_on ? 1 : 0);
     }
 
@@ -207,6 +212,27 @@ public class Config {
         } else {
             return inject_signature_enable;
         }
+    }
+
+    public boolean getCleanModeEnable() {
+        return clean_mode_enable;
+    }
+
+    public boolean getCleanModeDefault() {
+        return clean_mode_default && getCleanModeEnable();
+    }
+
+    public boolean getCleanModeCurrent() {
+        return getCleanModeEnable()
+                && prefs.getBoolean(PREF_CLEAN_MODE_NAME,
+                        getCleanModeDefault());
+    }
+
+    public boolean setCleanModeCurrent(boolean enable) {
+        prefs.edit()
+                .putBoolean(PREF_CLEAN_MODE_NAME,
+                        getCleanModeEnable() && enable).commit();
+        return getCleanModeCurrent();
     }
 
     public boolean getBackupModeEnable() {
@@ -272,26 +298,6 @@ public class Config {
         }
 
         return extras;
-    }
-
-    public boolean getShownRecoveryWarningBackup() {
-        return prefs.getBoolean(PREF_SHOWN_RECOVERY_WARNING_BACKUP_NAME, false);
-    }
-
-    public void setShownRecoveryWarningBackup() {
-        prefs.edit().putBoolean(PREF_SHOWN_RECOVERY_WARNING_BACKUP_NAME, true)
-                .commit();
-    }
-
-    public boolean getShownRecoveryWarningNotBackup() {
-        return prefs.getBoolean(PREF_SHOWN_RECOVERY_WARNING_NOT_BACKUP_NAME,
-                false);
-    }
-
-    public void setShownRecoveryWarningNotBackup() {
-        prefs.edit()
-                .putBoolean(PREF_SHOWN_RECOVERY_WARNING_NOT_BACKUP_NAME, true)
-                .commit();
     }
 
     public boolean getShownRecoveryWarningSecure() {

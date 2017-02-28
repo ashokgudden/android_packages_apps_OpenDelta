@@ -489,7 +489,7 @@ public class MainActivity extends Activity {
             // If we're in secure mode, but additional ZIPs to flash have been
             // detected, warn the user that these will not be flashed
 
-            final Runnable next = flashWarningBackup;
+            final Runnable next = flashWarningClean;
 
             if (config.getSecureModeCurrent()
                     && (config.getFlashAfterUpdateZIPs().size() > 0)) {
@@ -513,18 +513,19 @@ public class MainActivity extends Activity {
         }
     };
 
-    private Runnable flashWarningBackup = new Runnable() {
+    private Runnable flashWarningClean = new Runnable() {
         @Override
         public void run() {
-            // If backup mode is disabled, warn the user.
+            // If clean flash mode is checked but not backup mode, warn the user.
 
             final Runnable next = flashStart;
 
-            if (!config.getBackupModeCurrent()) {
+            if (config.getCleanModeCurrent()
+                    && !config.getBackupModeCurrent()) {
                 (new AlertDialog.Builder(MainActivity.this))
-                        .setTitle(R.string.flashWarningBackup_notice_title)
+                        .setTitle(R.string.flashWarningClean_notice_title)
                         .setMessage(
-                                Html.fromHtml(getString(R.string.flashWarningBackup_notice_description)))
+                                Html.fromHtml(getString(R.string.flashWarningClean_notice_description)))
                         .setCancelable(true)
                         .setNegativeButton(android.R.string.cancel, null)
                         .setPositiveButton(android.R.string.ok,
