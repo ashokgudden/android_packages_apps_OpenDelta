@@ -22,11 +22,6 @@
 		android:title="@string/category_flashing" >
 		<CheckBoxPreference
 			android:defaultValue="true"
-			android:key="secure_mode"
-			android:persistent="false"
-			android:title="@string/secure_mode_title" />
-		<CheckBoxPreference
-			android:defaultValue="true"
 			android:key="clean_mode"
 			android:persistent="false"
 			android:title="@string/clean_mode_title" />

@@ -73,7 +73,6 @@ public class SettingsActivity extends PreferenceActivity implements
     private ListPreference mAutoDownload;
     private ListPreference mBatteryLevel;
     private CheckBoxPreference mChargeOnly;
-    private CheckBoxPreference mSecureMode;
     private CheckBoxPreference mCleanMode;
     private CheckBoxPreference mBackupMode;
     private Config mConfig;
@@ -118,9 +117,6 @@ public class SettingsActivity extends PreferenceActivity implements
         mBatteryLevel.setSummary(mBatteryLevel.getEntry());
         mChargeOnly = (CheckBoxPreference) findPreference(PREF_CHARGE_ONLY);
         mBatteryLevel.setEnabled(!prefs.getBoolean(PREF_CHARGE_ONLY, true));
-        mSecureMode = (CheckBoxPreference) findPreference(KEY_SECURE_MODE);
-        mSecureMode.setEnabled(mConfig.getSecureModeEnable());
-        mSecureMode.setChecked(mConfig.getSecureModeCurrent());
 
         mCleanMode = (CheckBoxPreference) findPreference(KEY_CLEAN_MODE);
         mCleanMode.setEnabled(mConfig.getCleanModeEnable());
@@ -179,19 +175,6 @@ public class SettingsActivity extends PreferenceActivity implements
         } else if (preference == mChargeOnly) {
             boolean value = ((CheckBoxPreference) preference).isChecked();
             mBatteryLevel.setEnabled(!value);
-            return true;
-        } else if (preference == mSecureMode) {
-            boolean value = ((CheckBoxPreference) preference).isChecked();
-            mConfig.setSecureModeCurrent(value);
-            (new AlertDialog.Builder(this))
-                    .setTitle(
-                            value ? R.string.secure_mode_enabled_title
-                                    : R.string.secure_mode_disabled_title)
-                    .setMessage(
-                            Html.fromHtml(getString(value ? R.string.secure_mode_enabled_description
-                                    : R.string.secure_mode_disabled_description)))
-                    .setCancelable(true)
-                    .setNeutralButton(android.R.string.ok, null).show();
             return true;
         } else if (preference == mCleanMode) {
             boolean value = ((CheckBoxPreference) preference).isChecked();
