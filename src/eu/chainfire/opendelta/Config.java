@@ -343,8 +343,4 @@ public class Config {
     public boolean isOfficialVersion() {
         return getVersion().indexOf(official_version_tag) != -1;
     }
-
-    public String getAndroidVersion() {
-        return android_version;
-    }
 }
