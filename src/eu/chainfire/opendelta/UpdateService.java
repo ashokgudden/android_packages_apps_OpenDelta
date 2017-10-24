@@ -1106,12 +1106,12 @@ OnWantUpdateCheckListener, OnSharedPreferenceChangeListener {
         stopNotification();
         stopErrorNotification();
 
-        if (!isSupportedVersion()) {
+        //if (!isSupportedVersion()) {
             // TODO - to be more generic this should maybe use the info from getNewestFullBuild
             // updateState(STATE_ERROR_UNOFFICIAL, null, null, null, config.getVersion(), null);
-            Logger.i("Testing this new way - Let's see! " + config.getVersion());
-            return true;
-        }
+            //Logger.i("Testing this new way - Let's see! " + config.getVersion());
+            //return true;
+        //}
         if (!networkState.isConnected()) {
             updateState(STATE_ERROR_CONNECTION, null, null, null, null, null);
             Logger.i("Ignoring request to check for updates - no data connection");

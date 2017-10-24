@@ -5,10 +5,10 @@
 	<item name="debug_output" type="bool">true</item>
 
 	<!-- Property to read for ROM version -->
-	<string name="property_version">ro.rr.version</string>
+	<string name="property_version">ro.lineage.version</string>
 
 	<!-- Property to read for device identifier -->
-	<string name="property_device">ro.rr.device</string>
+	<string name="property_device">ro.lineage.device</string>
 
 	<!-- %s is expanded to property_version value. .zip, .delta, .update, .sign extensions added when needed -->
 	<string name="filename_base">%s</string>
@@ -66,7 +66,7 @@
 		<item>i777</item>
 	</string-array>
 
-	<string name="official_version_tag">SONI</string>
+	<string name="official_version_tag">official</string>
 
 	<string name="android_version">ro.build.version.release</string>
 </resources>
